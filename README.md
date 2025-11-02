@@ -3,7 +3,8 @@
 
 ## Installation and usage:
 
-1. **Download the app** from [GitHub Actions](https://github.com/inem/OpenInCursor/actions) (latest build artifacts)
+1. **Download the app** from [Releases](https://github.com/inem/OpenInCursor/releases) (pre-built app)
+   - Or download from [GitHub Actions](https://github.com/inem/OpenInCursor/actions) artifacts (latest build)
 
 2. **Handle Gatekeeper warning** (macOS security):
    - **Method 1 (Recommended)**: Right-click the downloaded app → **"Open"** (don't double-click)
@@ -33,11 +34,29 @@
 
 ## Build from source:
 
+### Option 1: Using Makefile (Recommended)
+
+```bash
+git clone https://github.com/inem/OpenInCursor.git
+cd OpenInCursor
+make install  # Builds and installs to /Applications
+```
+
+Or step by step:
+```bash
+make          # Build the app
+make install  # Install to /Applications
+make clean    # Clean build artifacts
+```
+
+### Option 2: Using Xcode
+
 ```bash
 git clone https://github.com/inem/OpenInCursor.git
 cd OpenInCursor
 open "Open in Cursor.xcodeproj"
 # Build in Xcode (Cmd+B)
+# App will be in: ~/Library/Developer/Xcode/DerivedData/.../Build/Products/Release/
 ```
 
 ![](http://i.imgur.com/F5ZrCmS.gif)
