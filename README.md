@@ -65,4 +65,4 @@ open "Open in Cursor.xcodeproj"
 
 ![Installation Demo](installation-demo.gif)
 
-> **Note**: Make sure to press and hold **Command** button while dragging App to toolbar
+> 💡 **Note**: Make sure to press and hold **⌘ Command** button while dragging App to toolbar
