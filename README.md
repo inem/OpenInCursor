@@ -1,6 +1,8 @@
 # OpenInCursor
 :open_file_folder: Finder toolbar app to open current folder in Cursor
 
+![Demo](demo.gif)
+
 ## Installation and usage:
 
 1. **Download the app** from [Releases](https://github.com/inem/OpenInCursor/releases) (pre-built app)
@@ -58,5 +60,3 @@ open "Open in Cursor.xcodeproj"
 # Build in Xcode (Cmd+B)
 # App will be in: ~/Library/Developer/Xcode/DerivedData/.../Build/Products/Release/
 ```
-
-![](http://i.imgur.com/F5ZrCmS.gif)
