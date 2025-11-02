@@ -4,7 +4,8 @@
 SCHEME = "Open in Cursor"
 PROJECT = "Open in Cursor.xcodeproj"
 CONFIG = Release
-OUTPUT_DIR = build/Release
+# Xcode builds to DerivedData, so we need to find it there
+OUTPUT_DIR = $(shell find ~/Library/Developer/Xcode/DerivedData/Open_in_Cursor-*/Build/Products/Release -name "Open in Cursor.app" -type d 2>/dev/null | head -1 | xargs dirname 2>/dev/null || echo "build/Release")
 
 # Default target
 all: generate-finder build
@@ -33,8 +34,13 @@ clean:
 # Install app to /Applications
 install: build
 	@echo "Installing to /Applications..."
-	@cp -R $(OUTPUT_DIR)/"Open in Cursor.app" /Applications/
-	@echo "Installed to /Applications/Open in Cursor.app"
+	@APP_PATH=$$(find ~/Library/Developer/Xcode/DerivedData/Open_in_Cursor-*/Build/Products/Release -name "Open in Cursor.app" -type d 2>/dev/null | head -1); \
+	if [ -z "$$APP_PATH" ]; then \
+		echo "Error: App not found in DerivedData"; \
+		exit 1; \
+	fi; \
+	cp -R "$$APP_PATH" /Applications/ && \
+	echo "Installed to /Applications/Open in Cursor.app"
 
 # Open project in Xcode
 open:
@@ -45,9 +51,10 @@ xcode: open
 
 # Show app location after build
 show:
-	@if [ -d "$(OUTPUT_DIR)/Open in Cursor.app" ]; then \
-		echo "App location: $(PWD)/$(OUTPUT_DIR)/Open in Cursor.app"; \
-		open $(OUTPUT_DIR); \
+	@APP_PATH=$$(find ~/Library/Developer/Xcode/DerivedData/Open_in_Cursor-*/Build/Products/Release -name "Open in Cursor.app" -type d 2>/dev/null | head -1); \
+	if [ -n "$$APP_PATH" ]; then \
+		echo "App location: $$APP_PATH"; \
+		open "$$APP_PATH"; \
 	else \
 		echo "App not found. Run 'make build' first."; \
 	fi
