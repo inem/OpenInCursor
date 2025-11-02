@@ -58,18 +58,13 @@ jobs:
           echo "Removed Finder.app from bundle"
         fi
 
-    - name: Sign app with ad-hoc signature (reduces quarantine issues)
+    - name: Sign app with ad-hoc signature (optional, may help with Gatekeeper)
+      continue-on-error: true
       run: |
         cd "${{ github.workspace }}/dist"
-        # Create empty entitlements file if needed
-        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > /tmp/entitlements.plist
-        echo "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">" >> /tmp/entitlements.plist
-        echo "<plist version=\"1.0\"><dict></dict></plist>" >> /tmp/entitlements.plist
-        # Sign with ad-hoc signature
-        codesign --force --deep --sign - --options runtime --entitlements /tmp/entitlements.plist "Open in Cursor.app" 2>&1
-        # Verify signing
-        codesign -dv --verbose=4 "Open in Cursor.app" 2>&1 | head -10
-        echo "Code signing completed"
+        # Simple ad-hoc signature - may help but won't fully bypass Gatekeeper
+        codesign --force --deep --sign - "Open in Cursor.app" 2>&1 || echo "Signing failed or skipped"
+        echo "Note: Gatekeeper warning will still appear - users need to right-click → Open"
 
     - name: Create zip archive
       run: |
