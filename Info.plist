@@ -32,5 +32,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>This app needs access to Apple Events to communicate with Finder and open folders in Cursor.</string>
 </dict>
 </plist>
