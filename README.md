@@ -8,6 +8,7 @@
 ### Install via Homebrew (Recommended)
 
 ```bash
+brew tap inem/open-in-cursor
 brew install --cask open-in-cursor
 ```
 
