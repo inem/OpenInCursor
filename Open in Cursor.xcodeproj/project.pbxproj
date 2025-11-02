@@ -240,7 +240,7 @@
 				INSTALL_PATH = /unsigned;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CODE_SIGN_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sertacozercan.openincursor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inem.openincursor;
 				PRODUCT_NAME = "Open in Cursor";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -260,7 +260,7 @@
 				INSTALL_PATH = /unsigned;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CODE_SIGN_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sertacozercan.openincursor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inem.openincursor;
 				PRODUCT_NAME = "Open in Cursor";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
