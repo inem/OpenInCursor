@@ -1,0 +1,66 @@
+name: Build OpenInCursor
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+        
+    - name: Build Release
+      run: |
+        cd "${{ github.workspace }}"
+        xcodebuild -project "Open in Cursor.xcodeproj" \
+          -scheme "Open in Cursor" \
+          -configuration Release \
+          -derivedDataPath ./build \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO \
+          clean build
+        
+    - name: Find and copy app bundle
+      run: |
+        cd "${{ github.workspace }}"
+        mkdir -p dist
+        APP_PATH=$(find build -name "Open in Cursor.app" -type d | head -1)
+        if [ -z "$APP_PATH" ]; then
+          echo "App bundle not found, searching..."
+          find build -type d -name "*.app" | head -5
+          exit 1
+        fi
+        cp -R "$APP_PATH" dist/
+        echo "App bundle copied from: $APP_PATH"
+        
+    - name: Create zip archive
+      run: |
+        cd "${{ github.workspace }}/dist"
+        zip -r "Open-in-Cursor.app.zip" "Open in Cursor.app"
+        
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Open-in-Cursor-app
+        path: dist/Open-in-Cursor.app.zip
+        
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/Open-in-Cursor.app.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
