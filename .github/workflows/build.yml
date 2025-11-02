@@ -82,6 +82,24 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: dist/Open-in-Cursor.app.zip
+        body: |
+          ## Open in Cursor
+          
+          macOS Finder toolbar app to open current folder in Cursor.
+          
+          ### Installation
+          
+          1. Download `Open-in-Cursor.app.zip` from this release
+          2. Unzip and move `Open in Cursor.app` to `/Applications`
+          3. **First launch**: Right-click the app → **"Open"** (to bypass Gatekeeper)
+          4. Add to Finder toolbar: Hold **Command** key and drag app to Finder toolbar
+          5. Allow access when macOS asks for Apple Events permission
+          
+          ### Note
+          
+          This app is not signed with Developer ID certificate, so macOS will show a security warning on first launch. After you right-click and "Open" it once, macOS will remember and allow it to run normally.
+          
+          For Gatekeeper-free experience, you would need a paid Apple Developer account ($99/year) for Developer ID signing.
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
