@@ -4,7 +4,9 @@ com.inem.open-in-cursor:
   releases: https://github.com/inem/OpenInCursor/releases
   homebrew: https://github.com/inem/homebrew-open-in-cursor
 
+homebrew-open-in-cursor:
+  repo: https://github.com/inem/homebrew-open-in-cursor
+
   install:
     brew tap inem/open-in-cursor
     brew install --cask open-in-cursor
-
