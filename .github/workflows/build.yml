@@ -49,7 +49,7 @@ jobs:
         fi
         cp -R "$APP_PATH" dist/
         echo "App bundle copied from: $APP_PATH"
-        
+
     - name: Remove Finder.app from bundle (if accidentally included)
       run: |
         cd "${{ github.workspace }}/dist"
@@ -57,11 +57,14 @@ jobs:
           rm -rf "Open in Cursor.app/Contents/Resources/Finder.app"
           echo "Removed Finder.app from bundle"
         fi
-        
+
     - name: Sign app with ad-hoc signature (reduces quarantine issues)
       run: |
         cd "${{ github.workspace }}/dist"
-        codesign --force --deep --sign - "Open in Cursor.app" 2>&1 || echo "Signing failed (non-critical)"
+        codesign --force --deep --sign - --options runtime --entitlements /dev/null "Open in Cursor.app" 2>&1
+        codesign -dv --verbose=4 "Open in Cursor.app" 2>&1 | head -10
+        echo "Code signing verification:"
+        codesign --verify --deep --strict --verbose=2 "Open in Cursor.app" 2>&1 || echo "Warning: Verification failed (expected for ad-hoc)"
 
     - name: Create zip archive
       run: |
