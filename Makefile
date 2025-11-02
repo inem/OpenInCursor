@@ -1,3 +1,4 @@
+include make-*.mk
 .PHONY: build clean install open xcode
 
 # Build configuration
@@ -69,4 +70,3 @@ help:
 	@echo "  make open    - Open project in Xcode"
 	@echo "  make show    - Show built app location"
 	@echo "  make help    - Show this help message"
-
