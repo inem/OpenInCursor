@@ -1,77 +1,76 @@
-# Добавление Open in Cursor в Homebrew
+# Adding Open in Cursor to Homebrew
 
-## Создание Cask файла
+## Creating Cask File
 
-Cask файл уже создан: `Casks/open-in-cursor.rb`
+Cask file has been created: `Casks/open-in-cursor.rb`
 
-## Процесс добавления в Homebrew
+## Process for Adding to Homebrew
 
-1. **Форкните репозиторий Homebrew Cask:**
+1. **Fork the Homebrew Cask repository:**
    ```bash
    gh repo fork Homebrew/homebrew-cask
    ```
 
-2. **Клонируйте ваш форк:**
+2. **Clone your fork:**
    ```bash
    git clone https://github.com/YOUR_USERNAME/homebrew-cask.git
    cd homebrew-cask
    ```
 
-3. **Скопируйте cask файл:**
+3. **Copy the cask file:**
    ```bash
    cp /path/to/OpenInCursor/Casks/open-in-cursor.rb Casks/
    ```
 
-4. **Создайте ветку и закоммитьте:**
+4. **Create branch and commit:**
    ```bash
    git checkout -b add-open-in-cursor
    git add Casks/open-in-cursor.rb
    git commit -m "Add Open in Cursor cask"
    ```
 
-5. **Запушьте и создайте Pull Request:**
+5. **Push and create Pull Request:**
    ```bash
    git push origin add-open-in-cursor
    gh pr create --title "Add Open in Cursor" --body "Add Open in Cursor cask - Finder toolbar app to open current folder in Cursor"
    ```
 
-## Требования для Homebrew Cask
+## Requirements for Homebrew Cask
 
-- ✅ Приложение должно быть в публичном репозитории
-- ✅ Должны быть стабильные релизы с архивами (`.zip`, `.dmg`, и т.д.)
-- ✅ SHA256 контрольная сумма (можно использовать `:no_check` для начальной версии, но лучше указать реальную)
-- ✅ Минимальная версия macOS (`depends_on macos: ">= :high_sierra"`)
+- ✅ Application must be in a public repository
+- ✅ Must have stable releases with archives (`.zip`, `.dmg`, etc.)
+- ✅ SHA256 checksum (can use `:no_check` for initial version, but better to specify actual hash)
+- ✅ Minimum macOS version (`depends_on macos: ">= :high_sierra"`)
 
-## Проверка Cask
+## Testing Cask
 
-Перед отправкой PR проверьте cask локально:
+Before submitting PR, test the cask locally:
 
 ```bash
 brew install --cask --build-from-source /path/to/Casks/open-in-cursor.rb
 brew audit --cask --new /path/to/Casks/open-in-cursor.rb
 ```
 
-## Получение SHA256
+## Getting SHA256
 
-Для релиза v1.0.0:
+For release v1.0.1:
 
 ```bash
-curl -sL https://github.com/inem/OpenInCursor/releases/download/v1.0.0/Open-in-Cursor.app.zip | shasum -a 256
+curl -sL https://github.com/inem/OpenInCursor/releases/download/v1.0.1/Open-in-Cursor.app.zip | shasum -a 256
 ```
 
-Затем обновите cask файл:
+Then update the cask file:
 ```ruby
-sha256 "полученный_hash"
+sha256 "obtained_hash"
 ```
 
-## Альтернатива: Использование tap (для тестирования)
+## Alternative: Using Tap (for testing)
 
-Можно создать собственный tap для тестирования:
+You can create your own tap for testing:
 
 ```bash
-# Создайте tap репозиторий на GitHub: homebrew-open-in-cursor
-# Затем:
+# Create a tap repository on GitHub: homebrew-open-in-cursor
+# Then:
 brew tap YOUR_USERNAME/open-in-cursor
 brew install open-in-cursor
 ```
-

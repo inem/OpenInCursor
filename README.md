@@ -39,7 +39,7 @@ brew install --cask open-in-cursor
 
 ## Usage
 
-**После установки:**
+**After installation:**
    - Navigate to any folder in Finder
    - Click the toolbar icon
    - Folder will open in Cursor
