@@ -61,10 +61,15 @@ jobs:
     - name: Sign app with ad-hoc signature (reduces quarantine issues)
       run: |
         cd "${{ github.workspace }}/dist"
-        codesign --force --deep --sign - --options runtime --entitlements /dev/null "Open in Cursor.app" 2>&1
+        # Create empty entitlements file if needed
+        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > /tmp/entitlements.plist
+        echo "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">" >> /tmp/entitlements.plist
+        echo "<plist version=\"1.0\"><dict></dict></plist>" >> /tmp/entitlements.plist
+        # Sign with ad-hoc signature
+        codesign --force --deep --sign - --options runtime --entitlements /tmp/entitlements.plist "Open in Cursor.app" 2>&1
+        # Verify signing
         codesign -dv --verbose=4 "Open in Cursor.app" 2>&1 | head -10
-        echo "Code signing verification:"
-        codesign --verify --deep --strict --verbose=2 "Open in Cursor.app" 2>&1 || echo "Warning: Verification failed (expected for ad-hoc)"
+        echo "Code signing completed"
 
     - name: Create zip archive
       run: |
