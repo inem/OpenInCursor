@@ -5,6 +5,14 @@
 
 ## Installation and usage:
 
+### Install via Homebrew (Recommended)
+
+```bash
+brew install --cask open-in-cursor
+```
+
+### Manual Installation
+
 1. **Download the app** from [Releases](https://github.com/inem/OpenInCursor/releases) (pre-built app)
    - Or download from [GitHub Actions](https://github.com/inem/OpenInCursor/actions) artifacts (latest build)
 
@@ -29,7 +37,9 @@
    - Right-click the toolbar icon → **"Open"**
    - Allow the app to run in System Settings if prompted
 
-6. **Usage**:
+## Usage
+
+**После установки:**
    - Navigate to any folder in Finder
    - Click the toolbar icon
    - Folder will open in Cursor
