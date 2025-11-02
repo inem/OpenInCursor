@@ -60,3 +60,7 @@ open "Open in Cursor.xcodeproj"
 # Build in Xcode (Cmd+B)
 # App will be in: ~/Library/Developer/Xcode/DerivedData/.../Build/Products/Release/
 ```
+
+## Installation Demo
+
+![Installation Demo](installation-demo.gif)
